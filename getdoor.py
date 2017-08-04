@@ -39,7 +39,36 @@ def click_and_crop(event, x, y, flags, param):
 		# the cropping operation is finished
 		refPt.append((x, y))
 		# draw a rectangle around the region of interest
+		#Calculate parallel coordinate of 2 line
+		x1=refPt[0][0]
+		y1=refPt[0][1]
+		x2=refPt[1][0]
+		y2=refPt[1][1]
+		a=1
+		b=2*(x1*y2-x2*y1)
+		c=(x1*y2-x2*y1)**2-100*((y2-y1)**2+(x2-x1)**2)
+		d = b**2-4*a*c # discriminant
+		if d == 0:
+			x = (-b+math.sqrt(d))/(2*a)
+		else:
+			c1 = (-b+math.sqrt(d))/(2*a)
+			c2 = (-b-math.sqrt(d))/(2*a)
+		#sx1,sx2,sx3,sx4,sy1,sy2,sy3,sy4 is the coordinate of 4 point that make a rectangular with the main line is in the middle 
+		sx1=(-c1-(x1/(y2-y1)+y1)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
+		sy1=x1/(y2-y1)+y1-sx1/(y2-y1)
+		
+		sx2=(-c1-(x2/(y2-y1)+y2)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
+		sy2=x2/(y2-y1)+y2-sx2/(y2-y1)
+		
+		sx3=(-c2-(x1/(y2-y1)+y1)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
+		sy3=x1/(y2-y1)+y1-sx3/(y2-y1)
+		
+		sx4=(-c2-(x2/(y2-y1)+y2)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
+		sy4=x2/(y2-y1)+y2-sx4/(y2-y1)
+		
 		cv2.line(image, refPt[0], refPt[1],(255,0,0),3,8,0)
+		cv2.line(image, (int(sx1),int(sy1)), (int(sx2),int(sy2)),(0,255,0),3,8,0)
+		cv2.line(image, (int(sx3),int(sy3)), (int(sx4),int(sy4)),(0,255,0),3,8,0)
 		cv2.imshow("image", image)
 
 	
@@ -102,6 +131,9 @@ while True:
 		sy4=x2/(y2-y1)+y2-sx4/(y2-y1)
 		
 		st=str(refPt[0][0])+"\n"+str(refPt[0][1])+"\n"+str(refPt[1][0])+"\n"+str(refPt[1][1])+"\n"+str(sx1)+"\n"+str(sy1)+"\n"+str(sx2)+"\n"+str(sy2)+"\n"+str(sx3)+"\n"+str(sy3)+"\n"+str(sx4)+"\n"+str(sy4)
+		print("Line mid: " + refPt[0][0])+"-"+str(refPt[0][1])+"\t"+str(refPt[1][0])+"-"+str(refPt[1][1]))
+		print("Line top: " + str(sx1)+"-"+str(sy1)+"\t"+str(sx2)+"-"+str(sy2))
+		print("Line bot: " + str(sx3)+"-"+str(sy3)+"\t"+str(sx4)+"-"+str(sy4))
 		file.write(st)
 		file.close()
 		print ("Saved")
