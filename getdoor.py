@@ -118,20 +118,20 @@ while True:
 			c1 = (-b+math.sqrt(d))/(2*a)
 			c2 = (-b-math.sqrt(d))/(2*a)
 		#sx1,sx2,sx3,sx4,sy1,sy2,sy3,sy4 is the coordinate of 4 point that make a rectangular with the main line is in the middle 
-		sx1=(-c1-(x1/(y2-y1)+y1)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
-		sy1=x1/(y2-y1)+y1-sx1/(y2-y1)
+		sx1=int((-c1-(x1/(y2-y1)+y1)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1)))
+		sy1=int(x1/(y2-y1)+y1-sx1/(y2-y1))
 		
-		sx2=(-c1-(x2/(y2-y1)+y2)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
-		sy2=x2/(y2-y1)+y2-sx2/(y2-y1)
+		sx2=int((-c1-(x2/(y2-y1)+y2)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1)))
+		sy2=int(x2/(y2-y1)+y2-sx2/(y2-y1))
 		
-		sx3=(-c2-(x1/(y2-y1)+y1)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
-		sy3=x1/(y2-y1)+y1-sx3/(y2-y1)
+		sx3=int((-c2-(x1/(y2-y1)+y1)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1)))
+		sy3=int(x1/(y2-y1)+y1-sx3/(y2-y1))
 		
-		sx4=(-c2-(x2/(y2-y1)+y2)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1))
-		sy4=x2/(y2-y1)+y2-sx4/(y2-y1)
+		sx4=int((-c2-(x2/(y2-y1)+y2)*(x1-x2))/(y2-y1+(x2-x1)/(y2-y1)))
+		sy4=int(x2/(y2-y1)+y2-sx4/(y2-y1))
 		
 		st=str(refPt[0][0])+"\n"+str(refPt[0][1])+"\n"+str(refPt[1][0])+"\n"+str(refPt[1][1])+"\n"+str(sx1)+"\n"+str(sy1)+"\n"+str(sx2)+"\n"+str(sy2)+"\n"+str(sx3)+"\n"+str(sy3)+"\n"+str(sx4)+"\n"+str(sy4)
-		print("Line mid: " + refPt[0][0])+"-"+str(refPt[0][1])+"\t"+str(refPt[1][0])+"-"+str(refPt[1][1]))
+		print("Line mid: " + str(refPt[0][0])+"-"+str(refPt[0][1])+"\t"+str(refPt[1][0])+"-"+str(refPt[1][1]))
 		print("Line top: " + str(sx1)+"-"+str(sy1)+"\t"+str(sx2)+"-"+str(sy2))
 		print("Line bot: " + str(sx3)+"-"+str(sy3)+"\t"+str(sx4)+"-"+str(sy4))
 		file.write(st)
@@ -144,3 +144,4 @@ while True:
 
 # close all open windows
 cv2.destroyAllWindows()
+
