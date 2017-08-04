@@ -13,11 +13,25 @@ import cv2
 # construct the argument parser and parse the arguments
 min_area = 500
 
+file=open("setting.txt","r")
+x1=int(file.readline())
+y1=int(file.readline())
+x2=int(file.readline())
+y2=int(file.readline())
 
+x3=int(file.readline())
+y3=int(file.readline())
+x4=int(file.readline())
+y4=int(file.readline())
+
+x5=int(file.readline())
+y5=int(file.readline())
+x6=int(file.readline())
+y6=int(file.readline())
 # if the video argument is None, then we are reading from webcam
 
 # otherwise, we are reading from a video file
-camera = cv2.VideoCapture("Tuan.mp4")
+camera = cv2.VideoCapture("sample-1.mov")
 
 # initialize the first frame in the video stream
 firstFrame = None
@@ -33,7 +47,9 @@ while True:
 	# of the video
 	if not grabbed:
 		break
-
+	cv2.line(frame,(x1,y1),(x2,y2),3,8,0)
+	cv2.line(frame,(x3,y3),(x4,y4),3,8,0)
+	cv2.line(frame,(x5,y5),(x6,y6),3,8,0)
 	# resize the frame, convert it to grayscale, and blur it
 	frame = imutils.resize(frame, width=500)
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -78,7 +94,7 @@ while True:
 	# cv2.imshow("Frame Delta", frameDelta)
 	key = cv2.waitKey(1) & 0xFF
 
-        rawCapture.truncate(0)
+        
 	# if the `q` key is pressed, break from the lop
 	if key == ord("q"):
 		break
@@ -86,3 +102,4 @@ while True:
 # cleanup the camera and close any open windows
 camera.release()
 cv2.destroyAllWindows()
+
